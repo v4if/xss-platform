@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+          body {
+            background-color: #eee;
+            font: 14px/1.5 'Helvetica Neue', 'STHeiti', 'Microsoft YaHei', Helvetica,Arial,sans-serif;
+          }
+          #main-content {
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fdfdfd;
+            box-shadow: 0px 0px 8px #aaa;
+          }
+          #title {
+            text-align: center;
+          }
+        </style>
+    </head>
+    <body>
+      <div id="main-content">
+        <div id="title">DOM Based XSS漏洞示例</div>
+        
+        <div id="dom-node">测试DOM</div>
+        插入DOM内容：<input type="text" name="input" id="input">
+        <input type="button" onclick="XSS()" value="写入DOM">
+
+      </div>
+
+      <script type="text/javascript">
+      	function XSS() {
+      		var str = document.getElementById("input").value;
+      		if (str.trim() == "") {
+      			alert("请输入DOM内容");
+      			return;
+      		}
+
+      		document.getElementById('dom-node').innerHTML = "<a href='http://" + str + "'>testLink</a>";
+      	}
+      </script>                                                     
+    </body>
+</html>
+
