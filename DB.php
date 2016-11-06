@@ -25,7 +25,7 @@ class DB
         $username = env("MYSQL_USERNAME", "homestead");
         $password = env("MYSQL_PASSWORD", "secret");
         try {
-            $this->pdo = new PDO("mysql:host=$serverName;dbname=$databaseName", $username, $password);
+            $this->pdo = new PDO("mysql:host=".$serverName.";dbname=".$databaseName, $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // 检测数据库是否存在表
             $isInstall = $this->pdo->query("SHOW TABLES like 'contacts';")
