@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-06 16:39:19
+ * @Last Modified time: 2016-11-06 16:44:19
  */
 // 开启报错信息
 // ini_set("display_errors", "On");
@@ -31,14 +31,21 @@ $username = env("MYSQL_USERNAME", "homestead");
 $password = env("MYSQL_PASSWORD", "secret");
 
 
-# 连接到数据库
-$mysqli = new mysqli($serverName.":".$port, $username, $password, $databaseName);  
-if(!$mysqli)  {  
-    echo"database error";  
-}else{  
-    echo"php env successful";  
-}  
-$mysqli->close();  
+
+$link = mysqli_connect($serverName.":".$port, $username, $password, $databaseName);
+
+if (!$link) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+
+echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
+echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
+
+mysqli_close($link);
+
 
 // $mysqli = new mysqli("localhost", "root", "", "student");
 // $sql = "SELECT * FROM tb_user";
