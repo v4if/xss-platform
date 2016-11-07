@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 10:59:25
+ * @Last Modified time: 2016-11-07 11:38:05
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -38,7 +38,17 @@ switch ($action) {
 			echo "请用正确的姿势提交留言！";
 		}
 		break;
-	
+	case 'delete':
+		if (isset($_GET('id'))) {
+			$id = $_GET('id');
+			$db->remove($id);
+			alert("留言区数据删除成功！");
+			echo '<a href="'. $_SERVER['PHP_SELF'] .'">Please back and try again</a>';
+		}
+	case 'drop':
+		$db->drop();
+		alert("数据库删除成功！");
+		break;
 	default:
 		$action = 'default';
 		$comment = $db->all();
@@ -100,7 +110,7 @@ switch ($action) {
 			            <td><?php echo $comm['title'] ?></td>
 			            <td><?php echo $comm['area'] ?></td>
 			            <td>
-			                <a href="index.php?delete=<?php echo $comm['id'] ?>">删除</a>
+			                <a href="<?php echo $_SERVER['PHP_SELF'];?>?action=delete&id=<?php echo $comm['id'] ?>">删除</a>
 			            </td>
 			        </tr>
 			    <?php

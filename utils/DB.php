@@ -71,4 +71,8 @@ class DB
         $sql = "INSERT INTO Comment ( title , area ) VALUES ('$title','$area')";
         return $this->pdo->exec($sql);
     }
+    public function drop()
+    {
+        $this->pdo->exec("drop table Comment");
+    }
 }
