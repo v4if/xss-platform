@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 10:42:46
+ * @Last Modified time: 2016-11-07 10:59:25
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -75,7 +75,7 @@ switch ($action) {
 	          .vertical-top {
 	          	vertical-align: top;
 	          }
-	        </style>
+	        </style> 
 	        <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	    </head>
 	    <body>

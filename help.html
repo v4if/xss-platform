@@ -22,18 +22,30 @@
             text-align: center;
           }
         </style>
+        <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
       <div id="main-content">
         <div id="title">XSS漏洞演练平台</div>
         
-        <strong>漏洞实验网址</strong>：XSS(Cross Site Scripting)跨站脚本攻击，让目标网站执行第三方代码，本质就是html注入<br>
-        <strong>主要危害</strong>：破坏网站运行，窃取用户Cookie<br>
-        <strong>主要类型</strong>：
-        <a href="./platform/xss1.php?param=hello xss" target="_blank">反射型XSS</a>、
-        存储型XSS、
-        <a href="./platform/xss4.html" target="_blank">DOM Based XSS</a><br>
-        <strong>XSS的防御</strong>：富文本过滤、CSP(Content-Security-Policy)、Cookie设置HttpOnly属性<br>
+        <table class="table">
+          <thead>
+          <tr>
+              <th>#</th>
+              <th>漏洞说明</th>
+              <th>漏洞实验网址</th>
+              <th>漏洞利用程序示例</th>
+          </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <th scope="row"> 0</th>
+                  <th>反射型XSS漏洞示例：GET方式提交</th>
+                  <td><a href="./platform/xss1.php"></a>platform/xss1.php</td>
+                  <td><a href="./exploit/xss1.html"></a>exploit/xss1.html</td>
+              </tr>
+          </tbody>
+      </table>
 
         <p style="text-align:center;"><strong>GitHub Repo 演练平台源代码： <a href="https://github.com/v4if/xss-platform" target="_blank">xss-platform</a></strong></p>
 
