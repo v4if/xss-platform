@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 09:59:00
+ * @Last Modified time: 2016-11-07 10:04:06
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -60,6 +60,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitted') {
           	vertical-align: top;
           }
         </style>
+        <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
       <div id="main-content">
@@ -80,8 +81,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitted') {
 		        ?>
 		        <tr>
 		            <th scope="row"> <?php echo $index + 1 ?></th>
-		            <td><?php echo $comm['name'] ?></td>
-		            <td><?php echo $comm['phone'] ?></td>
+		            <td><?php echo $comm['title'] ?></td>
+		            <td><?php echo $comm['area'] ?></td>
 		            <td>
 		                <a href="index.php?delete=<?php echo $comm['id'] ?>">删除</a>
 		            </td>
