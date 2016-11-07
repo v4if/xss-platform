@@ -74,6 +74,6 @@ class DB_Sql
     }
     public function exec($sql)
     {
-    	return $this->pdo->exec($sql);
+    	return $this->pdo->query($sql);
     }
 }
