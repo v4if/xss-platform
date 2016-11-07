@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 09:48:07
+ * @Last Modified time: 2016-11-07 09:59:00
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -65,7 +65,31 @@ if (isset($_POST['action']) && $_POST['action'] == 'submitted') {
       <div id="main-content">
         <div id="title">存储型XSS漏洞示例</div>
         
-       	<strong>留言区</strong>
+       	<table class="table">
+		    <caption>留言区</caption>
+		    <thead>
+		    <tr>
+		        <th>#</th>
+		        <th>标题</th>
+		        <th>内容</th>
+		        <th>删除</th>
+		    </tr>
+		    </thead>
+		    <tbody>
+		    <?php foreach ($comment as $index => $comm) {
+		        ?>
+		        <tr>
+		            <th scope="row"> <?php echo $index + 1 ?></th>
+		            <td><?php echo $comm['name'] ?></td>
+		            <td><?php echo $comm['phone'] ?></td>
+		            <td>
+		                <a href="index.php?delete=<?php echo $comm['id'] ?>">删除</a>
+		            </td>
+		        </tr>
+		    <?php
+		    } ?>
+		    </tbody>
+		</table>
        	<br><hr>
 
        	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" onsubmit="return verify()">
