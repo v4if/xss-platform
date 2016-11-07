@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 10:29:35
+ * @Last Modified time: 2016-11-07 10:36:58
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -15,30 +15,12 @@ header('X-XSS-Protection:0');
 require('../utils/DB_Sql.php');
 
 $db = new DB_Sql();
-$comment = $db->all();
 
 $action = $_GET['action'];
 switch ($action) {
-	case 'submitted':
-		if (isset($_POST['action']) && $_POST['action'] == 'submitted') {
-		    // print '<pre>';
-
-		    // print_r($_POST);
-		    // print '<a href="'. $_SERVER['PHP_SELF'] .'">Please try again</a>';
-
-		    // print '</pre>';
-
-		    // 将留言区内容写入数据库
-		    $db->add($_POST['title'], $_POST['area']);
-		    alert("留言区数据插入成功！")
-		    print '<a href="'. $_SERVER['PHP_SELF'] .'">Please try again</a>';
-		} else {
-			echo "请用正确的姿势提交留言！";
-		}
-		break;
-	
 	default:
 		$action = 'default';
+		$users = $db->all();
 		break;
 }
 ?>
@@ -79,40 +61,34 @@ switch ($action) {
 	      <div id="main-content">
 	        <div id="title">存储型XSS漏洞示例</div>
 	        
+	        <form action="<?php echo $_SERVER['PHP_SELF'];?>?action=submitted" method="post" onsubmit="return verify()">
+	       		Sql injection：
+	       		<input type="text" name="sqlinject">
+	       		<input type="hidden" name="action" value="submitted">
+	       		<input type="submit" name="submit">
+	       	</form>
+
 	       	<table class="table">
-			    <caption>留言区</caption>
+			    <caption>查询信息</caption>
 			    <thead>
 			    <tr>
 			        <th>#</th>
-			        <th>标题</th>
-			        <th>内容</th>
-			        <th>删除</th>
+			        <th>first_name</th>
+			        <th>last_name</th>
 			    </tr>
 			    </thead>
 			    <tbody>
-			    <?php foreach ($comment as $index => $comm) {
+			    <?php foreach ($users as $index => $user) {
 			        ?>
 			        <tr>
 			            <th scope="row"> <?php echo $index + 1 ?></th>
-			            <td><?php echo $comm['title'] ?></td>
-			            <td><?php echo $comm['area'] ?></td>
-			            <td>
-			                <a href="index.php?delete=<?php echo $comm['id'] ?>">删除</a>
-			            </td>
+			            <td><?php echo $user['first_name'] ?></td>
+			            <td><?php echo $user['last_name'] ?></td>
 			        </tr>
 			    <?php
 			    } ?>
 			    </tbody>
 			</table>
-	       	<br><hr>
-
-	       	<form action="<?php echo $_SERVER['PHP_SELF'];?>?action=submitted" method="post" onsubmit="return verify()">
-	       		<span class="vertical-top">标题：</span><textarea rows="1" cols="50" name="title" id="sub_title"></textarea><br>
-	       		<span class="vertical-top">内容：</span><textarea rows="3" cols="50" name="area" id="sub_area"></textarea><br>
-	       		<input type="hidden" name="action" value="submitted">
-	       		<input type="submit" name="submit">
-	       	</form>
-
 	      </div>             
 
 	      <script type="text/javascript">

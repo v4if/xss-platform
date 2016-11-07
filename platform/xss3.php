@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 10:30:56
+ * @Last Modified time: 2016-11-07 10:35:21
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -15,7 +15,6 @@ header('X-XSS-Protection:0');
 require('../utils/DB.php');
 
 $db = new DB();
-$comment = $db->all();
 
 $action = $_GET['action'];
 switch ($action) {
@@ -30,7 +29,7 @@ switch ($action) {
 
 		    // 将留言区内容写入数据库
 		    $db->add($_POST['title'], $_POST['area']);
-		    alert("留言区数据插入成功！")
+		    alert("留言区数据插入成功！");
 		    echo '<a href="'. $_SERVER['PHP_SELF'] .'">Please back and try again</a>';
 		} else {
 			echo "请用正确的姿势提交留言！";
@@ -39,6 +38,7 @@ switch ($action) {
 	
 	default:
 		$action = 'default';
+		$comment = $db->all();
 		break;
 }
 ?>
