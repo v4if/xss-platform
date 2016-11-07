@@ -30,20 +30,21 @@ class DB
             $this->pdo = new PDO("mysql:host=".$serverName.";dbname=".$databaseName.";port=".$serverPort, $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // 检测数据库是否存在表
-            $isInstall = $this->pdo->query("SHOW TABLES like 'Comment';")
+            $isInstall = $this->pdo->query("SHOW TABLES like 'users';")
                 ->rowCount();
             if (!$isInstall) {
                 $sql = "
-            CREATE TABLE Comment (
-            id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            title VARCHAR(255) NOT NULL,
-            area VARCHAR(255) NOT NULL )
+            CREATE TABLE users (
+            user_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            first_name VARCHAR(255) NOT NULL,
+            last_name VARCHAR(255) NOT NULL )
             ";
                 $this->pdo->exec($sql);
                 $sqlData = "
-        INSERT INTO `Comment` VALUES ('1', '第一条留言', 'Hello XSS');
-        INSERT INTO `Comment` VALUES ('2', 'Second', 'Test');
-        INSERT INTO `Comment` VALUES ('3', '我是第三条', 'Zone Open');
+        INSERT INTO `users` VALUES ('1', 'admin', 'admin');
+        INSERT INTO `users` VALUES ('2', 'Gordon', 'Brown');
+        INSERT INTO `users` VALUES ('3', 'Hack', 'Me');
+        INSERT INTO `users` VALUES ('4', 'chao', 'yang');
         ";
                 $this->pdo->exec($sqlData);
             }
@@ -54,21 +55,21 @@ class DB
     }
     public function all()
     {
-        return $this->pdo->query('SELECT * from Comment')
+        return $this->pdo->query('SELECT * from users')
             ->fetchAll();
     }
-    public function find($id)
+    public function find($user_id)
     {
-        return $this->pdo->query("SELECT * from Comment WHERE id = $id ")
+        return $this->pdo->query("SELECT * from users WHERE user_id = $user_id ")
             ->fetch();
     }
-    public function remove($id)
+    public function remove($user_id)
     {
-        return $this->pdo->exec("DELETE from Comment WHERE id = $id ");
+        return $this->pdo->exec("DELETE from users WHERE user_id = $user_id ");
     }
-    public function add($title, $area)
+    public function add($first_name, $last_name)
     {
-        $sql = "INSERT INTO Comment ( title , area ) VALUES ('$title','$area')";
+        $sql = "INSERT INTO users ( first_name , last_name ) VALUES ('$first_name','$last_name')";
         return $this->pdo->exec($sql);
     }
 }
