@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 11:20:42
+ * @Last Modified time: 2016-11-07 11:22:29
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -33,7 +33,7 @@ switch ($action) {
 		break;
 	default:
 		$action = 'default';
-		$users = "";
+		$users = array();
 		break;
 }
 ?>
