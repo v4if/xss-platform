@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 10:04:06
+ * @Last Modified time: 2016-11-07 10:08:59
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -16,15 +16,14 @@ require('../utils/DB.php');
 
 $db = new DB();
 $comment = $db->all();
-print_r($comment);
 
 if (isset($_POST['action']) && $_POST['action'] == 'submitted') {
-    print '<pre>';
+    // print '<pre>';
 
-    print_r($_POST);
-    print '<a href="'. $_SERVER['PHP_SELF'] .'">Please try again</a>';
+    // print_r($_POST);
+    // print '<a href="'. $_SERVER['PHP_SELF'] .'">Please try again</a>';
 
-    print '</pre>';
+    // print '</pre>';
 
     // 将留言区内容写入数据库
     $db->add($_POST['title'], $_POST['area']);
