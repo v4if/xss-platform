@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 11:38:05
+ * @Last Modified time: 2016-11-07 11:41:49
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -39,8 +39,8 @@ switch ($action) {
 		}
 		break;
 	case 'delete':
-		if (isset($_GET('id'))) {
-			$id = $_GET('id');
+		if (isset($_GET(['id']))) {
+			$id = $_GET(['id']);
 			$db->remove($id);
 			alert("留言区数据删除成功！");
 			echo '<a href="'. $_SERVER['PHP_SELF'] .'">Please back and try again</a>';
