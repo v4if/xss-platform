@@ -1,6 +1,6 @@
 <?php
 
-require('DB.php');
+require('../utils/DB.php');
 $db = new DB();
 if ($_POST) {
     $db->add($_POST['name'], $_POST['phone']);

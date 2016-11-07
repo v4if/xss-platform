@@ -25,7 +25,7 @@ class DB
         $databaseName = env("MYSQL_INSTANCE_NAME", "homestead");
         $username = env("MYSQL_USERNAME", "homestead");
         $password = env("MYSQL_PASSWORD", "secret");
-        echo "mysql:host=".$serverName.";dbname=".$databaseName.";port=".$serverPort;
+
         try {
             $this->pdo = new PDO("mysql:host=".$serverName.";dbname=".$databaseName.";port=".$serverPort, $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
