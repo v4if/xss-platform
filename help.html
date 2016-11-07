@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+          body {
+            background-color: #eee;
+            font: 14px/1.5 'Helvetica Neue', 'STHeiti', 'Microsoft YaHei', Helvetica,Arial,sans-serif;
+          }
+          #main-content {
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fdfdfd;
+            box-shadow: 0px 0px 8px #aaa;
+          }
+          #title {
+            text-align: center;
+          }
+        </style>
+    </head>
+    <body>
+      <div id="main-content">
+        <div id="title">XSS漏洞演练平台</div>
+        
+        <strong>漏洞实验网址</strong>：XSS(Cross Site Scripting)跨站脚本攻击，让目标网站执行第三方代码，本质就是html注入<br>
+        <strong>主要危害</strong>：破坏网站运行，窃取用户Cookie<br>
+        <strong>主要类型</strong>：
+        <a href="./platform/xss1.php?param=hello xss" target="_blank">反射型XSS</a>、
+        存储型XSS、
+        <a href="./platform/xss4.html" target="_blank">DOM Based XSS</a><br>
+        <strong>XSS的防御</strong>：富文本过滤、CSP(Content-Security-Policy)、Cookie设置HttpOnly属性<br>
+
+        <p style="text-align:center;"><strong>GitHub Repo 演练平台源代码： <a href="https://github.com/v4if/xss-platform" target="_blank">xss-platform</a></strong></p>
+
+      </div>                                                     
+    </body>
+</html>
