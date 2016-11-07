@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 10:36:58
+ * @Last Modified time: 2016-11-07 10:48:46
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -16,8 +16,19 @@ require('../utils/DB_Sql.php');
 
 $db = new DB_Sql();
 
-$action = $_GET['action'];
+$action = "";
+if (isset($_GET['action'])) {
+	$action = $_GET['action'];
+};
 switch ($action) {
+	case 'query':
+		if (isset($_POST['action']) && $_POST['action'] == 'submitted') {
+			$action = 'default';
+			$users = $db->exec($_POST['sqlinject']);
+		} else {
+			echo "请用正确的姿势提交！";
+		}
+		break;
 	default:
 		$action = 'default';
 		$users = $db->all();
@@ -59,11 +70,11 @@ switch ($action) {
 	    </head>
 	    <body>
 	      <div id="main-content">
-	        <div id="title">存储型XSS漏洞示例</div>
+	        <div id="title">Sql注入漏洞示例</div>
 	        
-	        <form action="<?php echo $_SERVER['PHP_SELF'];?>?action=submitted" method="post" onsubmit="return verify()">
+	        <form action="<?php echo $_SERVER['PHP_SELF'];?>?action=query" method="post" onsubmit="return verify()">
 	       		Sql injection：
-	       		<input type="text" name="sqlinject">
+	       		<input type="text" name="sqlinject" id="sqlinject">
 	       		<input type="hidden" name="action" value="submitted">
 	       		<input type="submit" name="submit">
 	       	</form>
@@ -93,11 +104,10 @@ switch ($action) {
 
 	      <script type="text/javascript">
 	        function verify() {
-				var sub_title = document.getElementById("sub_title").value;
-				var sub_area = document.getElementById('sub_area').value;
-				if ((sub_title.trim() == "") || (sub_area.trim() == ""))
+				var sqlinject = document.getElementById("sqlinject").value;
+				if (sqlinject.trim() == "")
 				{
-					alert("请输入留言的标题的内容");
+					alert("请输入Sql injection");
 					return false;
 				}
 				return true;

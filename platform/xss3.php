@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 10:35:21
+ * @Last Modified time: 2016-11-07 10:42:46
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -16,7 +16,10 @@ require('../utils/DB.php');
 
 $db = new DB();
 
-$action = $_GET['action'];
+$action = "";
+if (isset($_GET['action'])) {
+	$action = $_GET['action'];
+};
 switch ($action) {
 	case 'submitted':
 		if (isset($_POST['action']) && $_POST['action'] == 'submitted') {

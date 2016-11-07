@@ -72,4 +72,8 @@ class DB_Sql
         $sql = "INSERT INTO users ( first_name , last_name ) VALUES ('$first_name','$last_name')";
         return $this->pdo->exec($sql);
     }
+    public function exec($sql)
+    {
+    	return $this->pdo->exec($sql);
+    }
 }
