@@ -15,7 +15,7 @@ function env($key, $default = null)
     return $value;
 }
 
-class DB
+class DB_Sql
 {
     protected $pdo;
     function __construct()
