@@ -30,20 +30,20 @@ class DB
             $this->pdo = new PDO("mysql:host=".$serverName.";dbname=".$databaseName.";port=".$serverPort, $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // 检测数据库是否存在表
-            $isInstall = $this->pdo->query("SHOW TABLES like 'contacts';")
+            $isInstall = $this->pdo->query("SHOW TABLES like 'Comment';")
                 ->rowCount();
             if (!$isInstall) {
                 $sql = "
-            CREATE TABLE contacts (
+            CREATE TABLE Comment (
             id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            phone VARCHAR(255) NOT NULL )
+            title VARCHAR(255) NOT NULL,
+            area VARCHAR(255) NOT NULL )
             ";
                 $this->pdo->exec($sql);
                 $sqlData = "
-        INSERT INTO `contacts` VALUES ('1', 'John', '188888888');
-        INSERT INTO `contacts` VALUES ('2', 'Bob', '166666666');
-        INSERT INTO `contacts` VALUES ('3', 'Zoe', '155555555');
+        INSERT INTO `Comment` VALUES ('1', '第一条留言', 'Hello XSS');
+        INSERT INTO `Comment` VALUES ('2', 'Second', 'Test');
+        INSERT INTO `Comment` VALUES ('3', '我是第三条', 'Zone Open');
         ";
                 $this->pdo->exec($sqlData);
             }
@@ -54,21 +54,21 @@ class DB
     }
     public function all()
     {
-        return $this->pdo->query('SELECT * from contacts')
+        return $this->pdo->query('SELECT * from Comment')
             ->fetchAll();
     }
     public function find($id)
     {
-        return $this->pdo->query("SELECT * from contacts WHERE id = $id ")
+        return $this->pdo->query("SELECT * from Comment WHERE id = $id ")
             ->fetch();
     }
     public function remove($id)
     {
-        return $this->pdo->exec("DELETE from contacts WHERE id = $id ");
+        return $this->pdo->exec("DELETE from Comment WHERE id = $id ");
     }
-    public function add($name, $phone)
+    public function add($title, $area)
     {
-        $sql = "INSERT INTO contacts ( name , phone ) VALUES ('$name','$phone')";
+        $sql = "INSERT INTO Comment ( title , area ) VALUES ('$title','$area')";
         return $this->pdo->exec($sql);
     }
 }
