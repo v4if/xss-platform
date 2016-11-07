@@ -3,7 +3,7 @@
  * @Author: v4if
  * @Date:   2016-11-06 11:57:15
  * @Last Modified by:   v4if
- * @Last Modified time: 2016-11-07 11:01:44
+ * @Last Modified time: 2016-11-07 11:10:10
  */
 // 开启报错信息
 ini_set("display_errors", "On");
@@ -26,7 +26,9 @@ switch ($action) {
 			$action = 'default';
 			$id = $_POST['sqlinject'];
 			$query  = "SELECT first_name, last_name FROM users WHERE user_id = '$id';";
+			print_r($query);
 			$users = $db->exec($query);
+			print_r($users);
 		} else {
 			echo "请用正确的姿势提交！";
 		}
